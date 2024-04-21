@@ -1,14 +1,14 @@
 interface Props {
   image: string;
-  title: string;
+  name: string;
   type?: string;
 }
 
-function Card({ image, title, type }: Props) {
+function Card({ image, name, type }: Props) {
   return (
     <div>
-      <img src={image} alt={title} />
-      <p>{title}</p>
+      <img src={image} alt={name} />
+      <p>NAME : {name}</p>
       <p>{type}</p>
     </div>
   );
