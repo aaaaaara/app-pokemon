@@ -1,7 +1,6 @@
 import { getPokemonApi } from '@/api/repository';
 import Header from '@/components/Header/Header';
 import Input from '@/components/Input/Input';
-import Pokeball from '@/components/Pokeball/Pokeball';
 import { useEffect, useState } from 'react';
 import styles from './Main.module.scss';
 import List from './components/List/List';
@@ -20,21 +19,12 @@ function Main() {
   };
 
   useEffect(() => {
-    getPokemonApi();
     getPokemonData();
   }, []);
 
   return (
-    <section
-      className={styles.container}
-      onPointerMove={(e) => {
-        setPosition({
-          x: e.clientX,
-          y: e.clientY,
-        });
-      }}>
+    <section>
       <div className={styles.inner}>
-        <Pokeball clentX={position.x} clentY={position.y} />
         <Header />
         <Input onClick={goSearch} />
         <List pokemonData={pokemonData} />
