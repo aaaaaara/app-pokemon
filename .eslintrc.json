@@ -14,7 +14,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "ignorePatterns": ["dist/", "node_modules/"],
+  "ignorePatterns": ["dist/", "node_modules/", ".eslintrc.cjs"],
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
     "react/react-in-jsx-scope": "off"

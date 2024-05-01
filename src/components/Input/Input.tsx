@@ -2,9 +2,18 @@ import styles from './Input.module.scss';
 
 interface Props {
   onClick: () => void;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Input({ onClick }: Props) {
+/**
+ *
+ * @(사실 이 컴포넌트는 재사용이 되지 않으므로 별도로 분리 할 필요는 없다. 하지만 재사용이 된다고 가정하에 진행해보기로 함)
+ *
+ * 이 컴포넌트에서 필요한 props
+ */
+
+export default function Input({ onClick, value, setValue }: Props) {
   return (
     <div className={styles.search}>
       <input type="search" placeholder="너로 정했다 !" />

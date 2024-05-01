@@ -17,6 +17,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "vite.config.js"],
+  "include": ["src", "vite.config.js", ".eslintrc.cjs"],
   "exclude": ["node_modules", "build", "dist"]
 }
