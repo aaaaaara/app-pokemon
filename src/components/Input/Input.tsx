@@ -14,9 +14,17 @@ interface Props {
  */
 
 export default function Input({ onClick, value, setValue }: Props) {
+  const onChange = (e: any) => {
+    setValue(e.target.value);
+  };
   return (
     <div className={styles.search}>
-      <input type="search" placeholder="너로 정했다 !" />
+      <input
+        type="search"
+        placeholder="너로 정했다 !"
+        onChange={(e) => onChange(e)}
+        value={value}
+      />
       <button onClick={onClick}>
         <svg
           xmlns="http://www.w3.org/2000/svg"

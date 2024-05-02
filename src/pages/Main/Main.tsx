@@ -58,7 +58,7 @@ function Main() {
     <section>
       <div className={styles.inner}>
         <Header />
-        <Input onClick={goSearch} value={value} setValue={() => SetValue(value)} />
+        <Input onClick={goSearch} value={value} setValue={SetValue} />
         <List pokemonData={pokemonData} />
       </div>
     </section>
