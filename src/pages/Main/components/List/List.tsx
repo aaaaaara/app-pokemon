@@ -4,13 +4,16 @@ import styles from './List.module.scss';
 
 interface Props {
   pokemonData: GetPokemonBasicType[];
+  image: string;
 }
-function List({ pokemonData }: Props) {
+function List({ pokemonData, image }: Props) {
   return (
     <div className={styles.list_container}>
       <div className={styles.list}>
         {pokemonData &&
-          pokemonData.map((pokemon) => <Card key={pokemon.name} name={pokemon.name} />)}
+          pokemonData.map((pokemon) => (
+            <Card key={pokemon.name} name={pokemon.name} image={image} />
+          ))}
       </div>
     </div>
   );

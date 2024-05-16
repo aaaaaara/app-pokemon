@@ -1,27 +1,25 @@
-import { getPokemonDetailApi } from '@/api/repository';
-import { useEffect, useState } from 'react';
-
 interface Props {
   name: string;
   type?: string;
+  image: string;
 }
 
-function Card({ name, type }: Props) {
-  const [pokemonImage, setPokemonImage] = useState('');
+function Card({ name, type, image }: Props) {
+  //const [pokemonImage, setPokemonImage] = useState('');
 
-  const getPokemonDetail = () => {
-    getPokemonDetailApi(name)
-      .then((response) => response.json())
-      .then((data) => setPokemonImage(data.sprites.front_default))
-      .catch((error) => console.log(error));
-  };
+  // const getPokemonDetail = () => {
+  //   getPokemonDetailApi(name)
+  //     .then((response) => response.json())
+  //     .then((data) => setPokemonImage(data.sprites.front_default))
+  //     .catch((error) => console.log(error));
+  // };
 
-  useEffect(() => {
-    getPokemonDetail();
-  }, []);
+  // useEffect(() => {
+  //   getPokemonDetail();
+  // }, []);
   return (
     <div>
-      <img src={pokemonImage} alt={name} />
+      <img src={image} alt={name} />
       <p>NAME : {name}</p>
       <p>{type}</p>
     </div>

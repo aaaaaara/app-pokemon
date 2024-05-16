@@ -14,15 +14,12 @@ interface Props {
  */
 
 export default function Input({ onClick, value, setValue }: Props) {
-  const onChange = (e: any) => {
-    setValue(e.target.value);
-  };
   return (
     <div className={styles.search}>
       <input
         type="search"
         placeholder="너로 정했다 !"
-        onChange={(e) => onChange(e)}
+        onChange={(e) => setValue(e.target.value)}
         value={value}
       />
       <button onClick={onClick}>
