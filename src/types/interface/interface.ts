@@ -10,6 +10,6 @@ export interface GetPokemonType {
 
 export interface GetPokemonDTO {
   name: string;
-  url: string;
   image: string;
+  id: number;
 }

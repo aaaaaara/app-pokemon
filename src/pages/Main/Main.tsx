@@ -1,51 +1,51 @@
 import { getPokemonApi, getPokemonDetailApi } from '@/api/repository';
 import Header from '@/components/Header/Header';
 import Input from '@/components/Input/Input';
-import { GetPokemonBasicType } from '@/types/interface/interface';
+import { GetPokemonBasicType, GetPokemonDTO } from '@/types/interface/interface';
 import { useEffect, useState } from 'react';
 import styles from './Main.module.scss';
 import List from './components/List/List';
 function Main() {
-  const [pokemonData, setPokemonData] = useState<GetPokemonBasicType[]>([]); //포켓몬 전체 리스트
-  const [pokemonImage, setPokemonImage] = useState(''); //포켓몬 이미지 데이터
+  const [pokemonData, setPokemonData] = useState<GetPokemonDTO[]>([]); //포켓몬 전체 리스트
+  const [pokemonImage, setPokemonImage] = useState(); //포켓몬 이미지 데이터
   const [filteredPokemonData, setFilteredPokemonData] = useState<GetPokemonBasicType[]>([]);
   const [inputValue, setInputValue] = useState('');
 
   const goSearch = () => {
-    /*
-     * value state를 이용하여 pokemonData에서 value와 일치하는 data를 찾는다
-     */
-
     const pokemon = pokemonData.filter((pokemon) => pokemon.name.includes(inputValue));
     setFilteredPokemonData(pokemon);
+  };
+
+  const refineLogic = async (data: GetPokemonBasicType[]) => {
+    const names = data.map((pk) => pk.name);
+    let images = [];
+
+    const array = names.map(
+      async (name) => await getPokemonDetail(name).then((el) => images.push(el)),
+    );
+
+    await Promise.all(array);
   };
 
   const getPokemonData = () => {
     getPokemonApi()
       .then((response) => response.json())
       .then((data) => {
-        setPokemonData(data.results), setFilteredPokemonData(data.results);
-      })
-      .catch((error) => console.log(error));
+        refineLogic(data.results);
+      });
   };
 
-  const getPokemonDetail = (name: string) => {
-    getPokemonDetailApi(name)
+  const getPokemonDetail = async (name: string) => {
+    let res = '';
+    await getPokemonDetailApi(name)
       .then((response) => response.json())
-      .then((data) => setPokemonImage(data.sprites.front_default))
+      .then((data) => (res = data))
       .catch((error) => console.log(error));
-  };
-
-  const getImage = () => {
-    pokemonData.forEach((pokemon, i) => getPokemonDetail(pokemon.name));
+    return res.sprites.front_default;
   };
 
   useEffect(() => {
     getPokemonData();
-  }, []);
-
-  useEffect(() => {
-    getImage();
   }, []);
 
   useEffect(() => {
